@@ -1,9 +1,33 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/book/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "book"
+			}
+		},
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "home"
+			}
+		},
+		{
+			"path": "pages/add/index",
+			"style": {
+				"navigationBarTitleText": "add"
+			}
+		},
+		{
+			"path": "pages/home_book/index",
+			"style": {
+				"navigationBarTitleText": "home_book"
+			}
+		},
+		{
+			"path": "pages/home_tag/index",
+			"style": {
+				"navigationBarTitleText": "home_tag"
 			}
 		}
 	],
@@ -13,11 +37,36 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"easycom":  {
+	"tabBar": {
+		"color": "#ababab",
+		"selectedColor": "#000000",
+		"backgroundColor": "#FFF",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/book/index",
+				"text": "book",
+				"iconPath": "static/img/tabbar/book.png",
+				"selectedIconPath": "static/img/tabbar/book.png"
+			},
+			{
+				"pagePath": "pages/add/index",
+				"text": "",
+				"iconPath": "static/img/tabbar/add.png",
+				"selectedIconPath": "static/img/tabbar/add.png"
+			},
+			{
+				"pagePath": "pages/home/index",
+				"text": "home",
+				"iconPath": "static/img/tabbar/home.png",
+				"selectedIconPath": "static/img/tabbar/home.png"
+			}
+		]
+	},
+	"easycom": {
 		"autoscan": true,
 		"custom": {
-		"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
 		}
-	  }
-
+	}
 }

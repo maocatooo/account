@@ -7,4 +7,8 @@ module.exports = {
 		extend: {},
 	},
 	plugins: [],
+	corePlugins: {
+		// ...
+		float: false, // Disable float utilities to avoid conflicts
+	  },
 }
