@@ -67,3 +67,11 @@ export const BookJournals = async (c:types.BookJournalsReq):Promise<types.BookJo
     data: c
   })
 }
+
+export const CreateBookJournal = async (c: types.CreateBookJournalReq) => {
+  return await request({
+    url:"/journal",
+    method: "POST",
+    data:c
+  })
+}

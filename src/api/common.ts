@@ -1,5 +1,10 @@
 
 
+export function isLogin():boolean{
+  return uni.getStorageSync("token") && true
+} 
+
+
 export function showT (title :string, duration:number = 2000) {
   uni.showToast({
     title: title,

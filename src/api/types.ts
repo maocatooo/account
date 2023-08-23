@@ -1,13 +1,3 @@
-export interface CreateBookJournalReq {
-  amount: string
-  record: string
-  tid: string
-  tname: string
-  bookID: string
-  date: Number
-
-}
-
 export interface LoginReq {
   code: string
   cavatarUrlode?: string
@@ -58,4 +48,15 @@ export interface BookJournal {
   record: string
   bookID: string
   uid: string
+}
+
+
+export interface CreateBookJournalReq {
+  date:number
+  amount:string
+  record:string
+  tid: string
+  tname :string
+  bookID :string
+  name :string
 }
