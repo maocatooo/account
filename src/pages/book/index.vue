@@ -1,4 +1,11 @@
 <template>
+
+  <dateMonthPicker :month="selector.selectedMonth" :year="selector.selectedYear" @changeDate="change">
+    <view class="picker">
+        {{ selector.selectedYear }}年{{ selector.selectedMonth }}月
+    </view>
+  </dateMonthPicker>
+
   <view>
     <view
       v-for="(item, index) in groupBookJournals?.groupData"
@@ -27,10 +34,23 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { Login, Books, BookJournals } from "../../api/index";
+import { isLogin } from "../../api/common";
+import dateMonthPicker from "../../components/date_month_picker/index.vue";
 import type * as types from "../../api/types";
 import { ref, computed } from "vue";
 import moment from "moment";
 import Decimal from "decimal.js";
+
+const selector = reactive({
+  selectedYear: new Date().getFullYear(),
+  selectedMonth: new Date().getMonth() + 1,
+})
+
+const change = ({year, month}:{year:number, month:number}) => {
+  selector.selectedYear = year
+  selector.selectedMonth = month
+  initPage()
+}
 
 const books = ref([] as types.Book[]);
 
@@ -70,14 +90,13 @@ const groupBookJournals = computed(() => {
   };
 });
 
-
 const formatTime = (t :number) => {
   // 时分秒
   return moment(t).format("HH:mm");
 }
 
 
-onShow(async () => {
+const initPage =async () => {
   const res = await Books();
   books.value = res;
 
@@ -86,9 +105,16 @@ onShow(async () => {
   }
   const bgs = await BookJournals({
     bookID: books.value[0].id,
-    date: parseInt(moment(moment().format("YYYY-MM")).format("x")),
+    date: parseInt(moment(new Date(selector.selectedYear, selector.selectedMonth-1)).format("x")),
   });
   bookJournals.value = bgs;
+}
+
+onShow(async () => {
+  if (!isLogin()) {
+    return;
+  }
+  await initPage()
 });
 </script>
 <style>

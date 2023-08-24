@@ -10,7 +10,7 @@
     <view>
       <uni-popup ref="popup" background-color="#fff" @change="change">
       <view class="p-3 h-60">
-        <uni-easyinput cursorSpacing="100" v-model="addTagName" placeholder="tag name" />
+        <uni-easyinput :cursorSpacing="100" v-model="addTagName" placeholder="tag name" />
         <button class="my-1" @click="addTag">提交</button>
       </view>
     </uni-popup>

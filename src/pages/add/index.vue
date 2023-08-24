@@ -88,9 +88,9 @@ const popAdd = (tag: types.Tag) => {
 };
 
 const createBookJournal = async () => {
-  
   if (createdData.amount === '' || createdData.name === ''){
     showT("请填写完整")
+    return
    }
    await CreateBookJournal(createdData)
    showT("添加成功")
