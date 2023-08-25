@@ -1,11 +1,15 @@
 <template>
   <view>
+    <uni-swipe-action>
     <view>
-      <view v-for="(item, index) in tags" :key="index" class="p-3">
-        <text> {{ item.name }}</text>
-      </view>
+      <swipe v-for="(item, index) in tags" :key="index" class="p-3" :data="item" @btn1="btn1" @btn2="btn2">
+           <text> {{ item.name }}</text>
+      </swipe>
       <button @click="popAdd">新建</button>
     </view>
+   
+  </uni-swipe-action>
+    
 
     <view>
       <uni-popup ref="popup" background-color="#fff" @change="change">
@@ -22,6 +26,7 @@
 
 <script setup lang="ts">
 import uniEasyinput from "@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
+import swipe from "../../components/swipe/index.vue";
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { CreateTag, Tags } from "../../api/index";
 import { showT } from "../../api/common";
@@ -49,6 +54,21 @@ const popAdd = () => {
 const change = (e: any) => {
   console.log(e);
 };
+
+
+const btn1 = (e: any) => {
+  console.log("btn1");
+  console.log(e);
+};
+
+
+const btn2 = (e: any) => {
+  console.log("btn2");
+  
+  console.log(e);
+};
+
+
 const addTag = () => {
   // 判断是否为空
   if (addTagName.value == ""){
