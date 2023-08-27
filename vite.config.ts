@@ -7,6 +7,14 @@ import postcss from './postcss.config'
 
 console.log(process.env.UNI_PLATFORM === 'mp-weixin')
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        // 指定输出路径
+        dir: 'dist/dev/mp-weixin', // 你想要的输出路径
+      },
+    },
+  },
   plugins: [
     AutoImport({
       imports: ['vue', 'uni-app'],

@@ -25,12 +25,15 @@ export interface Book {
 export interface Tag {
   id: string
   name: string
+  icon:string
   createdTime: number
   priority: number
 }
 
-export interface CreateTagReq {
+export interface SaveTagReq {
+  id?: string
   name: string
+  icon?:string
 }
 
 export interface BookJournalsReq {
@@ -51,7 +54,8 @@ export interface BookJournal {
 }
 
 
-export interface CreateBookJournalReq {
+export interface SaveBookJournalReq {
+  id?:string
   date:number
   amount:string
   record:string

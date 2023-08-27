@@ -9,7 +9,8 @@ interface requestInfo {
   }
 }
 
-const api_url = "https://ac.maocat.cc"
+// const api_url = "https://ac.maocat.cc"
+const api_url = "http://127.0.0.1:8888"
 
 async function request(info: requestInfo): Promise<any> {
   try {
@@ -54,11 +55,18 @@ export const Tags = async (): Promise<types.Tag[]> => {
   })
 }
 
-export const CreateTag = async (c: types.CreateTagReq) : Promise<types.Tag> => {
+export const CreateTag = async (c: types.SaveTagReq) : Promise<types.Tag> => {
   return await request({
     url: "/tag", method: "POST", data: c
   })
 }
+
+export const UpdateTag = async (c: types.SaveTagReq) : Promise<types.Tag> => {
+  return await request({
+    url: "/tag", method: "PUT", data: c
+  })
+}
+
 
 export const BookJournals = async (c:types.BookJournalsReq):Promise<types.BookJournal[]> => {
   return await request({
@@ -68,10 +76,35 @@ export const BookJournals = async (c:types.BookJournalsReq):Promise<types.BookJo
   })
 }
 
-export const CreateBookJournal = async (c: types.CreateBookJournalReq) => {
+export const CreateBookJournal = async (c: types.SaveBookJournalReq) => {
   return await request({
     url:"/journal",
     method: "POST",
     data:c
+  })
+}
+
+export const UpdateBookJournal = async (c: types.SaveBookJournalReq) => {
+  return await request({
+    url:"/journal",
+    method: "PUT",
+    data:c
+  })
+}
+
+export const DeleteBookJournal = async (id: string) => {
+  return await request({
+    url:"/journal",
+    method: "DELETE",
+    data:{id}
+  })
+}
+
+
+export const NamePrompt = async (tid: string) => {
+  return await request({
+    url:"/name_prompt",
+    method: "GET",
+    data:{tid}
   })
 }

@@ -21,7 +21,7 @@
 import { defineComponent} from 'vue'
 
 export default defineComponent({
-setup: (props, {emit}) => {
+setup: (_, {emit}) => {
   const handleDateChange = (event: any) => {
     const [year, month] = event.detail.value.split("-");
     // 传递给父组件

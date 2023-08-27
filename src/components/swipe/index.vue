@@ -22,7 +22,6 @@ export default defineComponent({
   },
 
 setup: (props, {emit}) => {
-  console.log(props);
   const bindClick = (e: any) => {
     if (e.position === "right") {
       if (e.index === 0){

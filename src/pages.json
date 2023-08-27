@@ -1,21 +1,23 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
+		
+	
+	{
+		"path": "pages/home/index",
+		"style": {
+			"navigationBarTitleText": "home"
+		}
+	},
+	{
 			"path": "pages/book/index",
 			"style": {
 				"navigationBarTitleText": "book"
 			}
 		},
 		{
-			"path": "pages/home/index",
+			"path": "pages/save/index",
 			"style": {
-				"navigationBarTitleText": "home"
-			}
-		},
-		{
-			"path": "pages/add/index",
-			"style": {
-				"navigationBarTitleText": "add"
+				"navigationBarTitleText": "记账"
 			}
 		},
 		{
@@ -50,7 +52,7 @@
 				"selectedIconPath": "static/img/tabbar/book.png"
 			},
 			{
-				"pagePath": "pages/add/index",
+				"pagePath": "pages/save/index",
 				"text": "",
 				"iconPath": "static/img/tabbar/add.png",
 				"selectedIconPath": "static/img/tabbar/add.png"
