@@ -27,7 +27,8 @@
       </view>
         <swipe v-for="i2 in item.data" :key="i2.id" :data="i2" @btn1="deleteItem" @btn2="updateItem">
           <view class="flex flex-row items-center px-4  py-4 ">
-            <view class="w-1/4 text-left">{{ i2.tname }}</view>
+            <tagIcon :data="tagMap[i2.tid]?.icon || undefined" :iconName="showTagName? i2.tname:''" :imageClass="'w-7 h-7'" class="w-1/4 text-center" /> 
+            <!-- <view class="w-1/4 text-left">{{ i2.tname }}</view> -->
             <view class="w-1/4 text-center text-sm">{{ formatTime(i2.date) }}</view>
             <view class="w-1/4 text-center">{{ i2.name }}</view>
             <view class="w-1/4 text-center">{{ i2.amount }}</view>
@@ -40,7 +41,7 @@
 
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onLoad } from "@dcloudio/uni-app";
-import { DeleteBookJournal, Books, BookJournals } from "../../api/index";
+import { DeleteBookJournal, Books,Tags, BookJournals } from "../../api/index";
 import { isLogin, showT,switchTab } from "../../api/common";
 import dateMonthPicker from "../../components/date_month_picker/index.vue";
 import tagIcon from "../../components/tag_icon/index.vue";
@@ -49,7 +50,6 @@ import type * as types from "../../api/types";
 import { ref, computed } from "vue";
 import moment from "moment";
 import Decimal from "decimal.js";
-
 
 
 const selector = reactive({
@@ -64,6 +64,8 @@ const change = ({ year, month }: { year: number, month: number }) => {
 }
 
 const books = ref([] as types.Book[]);
+
+const tagMap = {} as { [key: string]: types.Tag };
 
 const bookJournals = ref([] as types.BookJournal[]);
 
@@ -119,6 +121,7 @@ const formatTime = (t: number) => {
   return moment(t).format("HH:mm");
 }
 
+let showTagName = false
 
 const initPage = async () => {
   const res = await Books();
@@ -127,11 +130,21 @@ const initPage = async () => {
   if (books.value.length === 0) {
     return;
   }
+
+  const tags = await Tags();
+    tags.map((item) => {
+      tagMap[item.id] = item
+    })
+
   const bgs = await BookJournals({
     bookID: books.value[0].id,
     date: parseInt(moment(new Date(selector.selectedYear, selector.selectedMonth - 1)).format("x")),
   });
   bookJournals.value = bgs;
+
+  showTagName = uni.getStorageSync("showTagName")  
+  console.log(showTagName);
+  
 }
 
 onShow(async () => {

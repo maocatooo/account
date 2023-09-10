@@ -2,7 +2,8 @@
   <view>
     <view class="flex flex-wrap mx-4 mt-3 border-2 border-gray-50 rounded-md">
       <view v-for="(item, index) in tags" :key="index" class="w-1/4 text-center px-2 py-4" @click="popAdd(item)">
-        <text> {{ item.name }}</text>
+        <tagIcon :data="item.icon || undefined" :imageClass="'w-8 h-8'" :iconName="item.name"  class="w-1/3" /> 
+        <!-- <text class="text-xs"> {{ item.name }}</text> -->
       </view>
     </view>
 
@@ -71,7 +72,7 @@ import { UpdateBookJournal, CreateBookJournal, Tags, Books, NamePrompt } from ".
 import { showT, isLogin, switchTab } from "../../api/common";
 import type * as types from "../../api/types";
 import { reactive, ref, onMounted, toRefs } from "vue";
-
+import tagIcon from "../../components/tag_icon/index.vue";
 const tags = ref([] as types.Tag[]);
 // 对应uni-popup ref="popup" 里面的ref
 const popup = ref<any | null>(null);

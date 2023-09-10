@@ -1,34 +1,41 @@
 <template>
-  <uni-list>
-    <uni-list-item
-      :title="user.name"
-      note="--"
-      :thumb="user.avatarUrl"
-      thumb-size="lg"
-      rightText=""
-      clickable
-      @click="login"
-    />
-    <uni-list-item
-      title="account books"
-      showArrow
-      clickable
-      @click="navigateTo('/pages/home_book/index')"
-      :rightText="info.books.length.toString()"
-    />
-    <uni-list-item
-      title="tags"
-      showArrow
-      clickable
-      @click="navigateTo('/pages/home_tag/index')"
-      :rightText="info.tags.length.toString()"
-    />
-  </uni-list>
+  <view class="p-5">
+    <view class="flex flex-row items-center h-12" @click="login">
+      <view >
+        <img class="w-16 h-16" :src="user.avatarUrl" alt="">
+      </view>
+      <view class=" ml-5">
+        {{ user.name }}
+      </view>
+    </view>
+    <view  class="flex flex-row items-center h-12" @click="navigateTo('/pages/home_book/index')">
+      <view class="w-1/2">
+        account books
+      </view>
+      <view class="w-1/2 text-right">
+        {{ info.books.length.toString() }} >
+      </view>
+    </view>
+    <view class="flex flex-row items-center  h-12" @click="navigateTo('/pages/home_tag/index')">
+      <view class="w-1/2">
+        tags
+      </view>
+      <view class="w-1/2 text-right">
+        {{ info.tags.length.toString() }} >
+      </view>
+    </view>
+    <view class="flex flex-row items-center  h-12">
+      <view class="w-1/2">
+        book show tag name
+      </view>
+      <view class="w-1/2 text-right">
+        <switch :checked="showTagNameFlag" style="transform:scale(0.7)" @change="showTagName" />
+      </view>
+    </view>
+  </view>
 </template>
 
 <script setup  lang="ts">
-import uniList from "@dcloudio/uni-ui/lib/uni-list/uni-list.vue";
-import uniListItem from "@dcloudio/uni-ui/lib/uni-list-item/uni-list-item.vue";
 import { reactive } from "vue";
 import { navigateTo } from "../../api/common";
 import { Login, Books, Tags } from "../../api/index";
@@ -60,11 +67,19 @@ const login = () => {
   });
 };
 
+let showTagNameFlag = false
+
 onShow(() => {
   // 每次进来页面重新登录一下,反正是静默登录
   login();
+  showTagNameFlag = uni.getStorageSync('showTagName')|| false
 });
+
+const showTagName = (e:any)=>{
+  showTagNameFlag = e.detail.value
+  uni.setStorageSync("showTagName",e.detail.value)  
+}
+
 </script>
 
-<style>
-</style>
+<style></style>

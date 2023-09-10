@@ -9,8 +9,8 @@ interface requestInfo {
   }
 }
 
-// const api_url = "https://ac.maocat.cc"
-const api_url = "http://127.0.0.1:8888"
+const api_url = "https://ac.maocat.cc"
+// const api_url = "http://127.0.0.1:8888"
 
 async function request(info: requestInfo): Promise<any> {
   try {
