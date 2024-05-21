@@ -4,7 +4,7 @@ WORKDIR /app
 
 ADD . .
 
-RUN pip install -r requirement.txt
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirement.txt 
 
 EXPOSE 8888
 
