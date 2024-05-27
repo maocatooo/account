@@ -5,7 +5,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import {UnifiedViteWeappTailwindcssPlugin as uvwt} from 'weapp-tailwindcss/vite'
 import postcss from './postcss.config'
 
-console.log(process.env.UNI_PLATFORM === 'mp-weixin')
 export default defineConfig({
   build: {
     rollupOptions: {

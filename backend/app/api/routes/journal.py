@@ -14,8 +14,10 @@ router = APIRouter()
 def journals(db: SessionDep, current_user: CurrentUser, date="", book_id=""):
     current_date = datetime.strptime(date, "%Y-%m")
     next_date = datetime(current_date.year, current_date.month + 1, day=1)
-    ts = db.exec(select(BookJournal).where(BookJournal.uid == current_user.id, BookJournal.book_id == book_id,
-                                           BookJournal.date >= current_date, BookJournal.date <= next_date)).all()
+    ts = db.exec(select(BookJournal).where(
+        BookJournal.uid == current_user.id, BookJournal.book_id == book_id,
+        BookJournal.date >= current_date, BookJournal.date <= next_date)
+                 .order_by(text("date DESC"))).all()
     return ts
 
 

@@ -1,11 +1,13 @@
 <template>
-  <view :class="viewClass">
+  <view>
+    <view :class="viewClass">
     <view class=" flex items-center justify-center">
       <img :src="data" :class="imageClass">
     </view>
     <view v-if="iconName">
        <text class="text-xs">{{ iconName }}</text> 
      </view>
+  </view>
   </view>
 </template>
 

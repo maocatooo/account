@@ -98,14 +98,13 @@ prompts.extend(
     )
 )
 prompts.extend(
-    gen_dialog(gen_prompt("今天是2024-05-20,今天买花花费88块八毛八", ["早饭,午饭,购物,礼物"]),
-               """datetime:2023-08-01 12:00,amount:88.88,tag:礼物,name:买花"""
+    gen_dialog(gen_prompt("今天是2024-05-20,下午买花花费88块八毛八", ["早饭,午饭,购物,礼物"]),
+               """datetime:2024-05-20 18:00,amount:88.88,tag:礼物,name:买花"""
                )
 )
 
 
 def work_shop(content):
-    print(content)
     url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=" + get_access_token()
     msgs = []
     msgs.extend(prompts)
@@ -128,7 +127,7 @@ if __name__ == "__main__":
 示例的tag:
 早饭,午饭,购物,饮料
 输入:
-今天是2024-05-05,今天买水花了3块
+今天是2024-05-05,今早上买水花了3块
 输出:
 """)
     print(a)

@@ -37,6 +37,12 @@
     </view>
   </uni-swipe-action>
   </view>
+
+  <view>
+    <view v-if="books" >
+      <Recorder :book_id="book_id" class="mt-auto fixed bottom-4  w-full"/>
+    </view>
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -46,12 +52,12 @@ import { isLogin, showT,switchTab } from "../../api/common";
 import dateMonthPicker from "../../components/date_month_picker/index.vue";
 import tagIcon from "../../components/tag_icon/index.vue";
 import swipe from "../../components/swipe/index.vue";
+import Recorder from "../../components/recorder/index.vue";
 import type * as types from "../../api/types";
 import { ref, computed } from "vue";
 import moment from "moment";
 import Decimal from "decimal.js";
 import {useSaveBookStore} from "../../store/saveBook"
-
 
 const store = useSaveBookStore()
 
@@ -67,6 +73,8 @@ const change = ({ year, month }: { year: number, month: number }) => {
 }
 
 const books = ref([] as types.Book[]);
+
+const book_id = ref("")
 
 const tagMap = {} as { [key: string]: types.Tag };
 
@@ -128,12 +136,13 @@ let showTagName = false
 
 const initPage = async () => {
   const res = await Books();
+  console.log("books",res)
   books.value = res;
 
   if (books.value.length === 0) {
     return;
   }
-
+  book_id.value  = books.value[0].id
   const tags = await Tags();
     tags.map((item) => {
       tagMap[item.id] = item
